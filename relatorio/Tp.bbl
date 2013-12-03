@@ -1,0 +1,48 @@
+\begin{thebibliography}{10}
+
+\bibitem{balas89}
+Balas, Egon and Ng, ShuMing.
+\newblock On the Set Covering Polytope: I. All the Facets with coefficients in \{0,1,2\}.
+\newblock {\em Mathematical Programming}, 43:57--69, 1989.
+
+\bibitem{saxena04}
+Anureet Saxena.
+\newblock On the Set Covering Polytope: All the Facets with coefficients in \{0,1,2,3\}.
+\newblock {\em GSIA Working Paper}, 2004.
+
+\bibitem{balas801}
+Balas, Egon.
+\newblock Cutting planes from conditional bounds: a new approach to set covering.
+\newblock {\em Combinatorial Optimization}, volume~12, pages 19--36, 1980.
+
+\bibitem{balas802}
+Balas, Egon and Ho, Andrew.
+\newblock Set Covering algorithms using cutting planes, heuristics, and subgradient optimization: a computational
+study.
+\newblock {\em Combinatorial Optimization}, volume~12, pages 37--60, 1980.
+
+\bibitem{Beasley87}
+Beasley, J. E.
+\newblock An  algorithm  for set covering  problem.
+\newblock {\em European Journal of Operational Research}, 31:85--93, 1987.
+
+\bibitem{Fischetti07}
+Fischetti, Matteo and Lodi, Andrea
+\newblock Optimizing over the First Chvàtal Closure.
+\newblock {\em Mathematical Programming}, 110:3--20, 2007.
+
+\bibitem{Bertsimas05}
+Bertsimas, Dimitris and Weismantel, Robert.
+\newblock Formulations.
+\newblock {\em Optimization over Integers}, 1:5--6, 2005.
+
+\bibitem{Beasley90}
+Beasley, J. E.
+\newblock OR-Library: distributing test problems by electronic mail.
+\newblock {\em Journal of the Operational Research Society}, 41:1069--1072, 1990.
+
+\bibitem{Beasley90}
+Fischetti, Matteo and Lodi, Andrea
+\newblock Optimizing over the first Chvátal closure.
+\newblock {\em Mathematical Programming}, 41:1069--1072, 1990.
+\end{thebibliography}

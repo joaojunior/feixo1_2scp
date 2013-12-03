@@ -1,0 +1,17 @@
+\newtheorem{ambiente}{Proposição}
+\begin{ambiente}
+Dado um grafo $G = (V,A)$, o desvio robusto relativo para um caminho $P \subseteq A$ de $s$ até $t$, com $s,t \in V$ é máximo no cenário onde 
+todos os arcos de $P$ estão com custos fixados no $u_{ij}$ e os demais arcos de $A$ estão com custos fixados no $l_{ij}$. \\
+\textbf{Prova:} Dado $d^{*}_{P}$ o desvio robusto relativo máximo do caminho $P$ obtido no cenário $s_p$. Seja $s$ o cenário no qual as arestas $(i,j)$ 
+de $P \subseteq A$ estão com os valores fixados no $u_{ij}$ e os demais arcos $(i,j)$ de $A$ estão com valores fixados em $l_{ij}$. Então: \\
+\begin{center}
+\begin{equation*}
+d^{*}_{P} = \frac{c^{s_p}_{P} - c^{s_p}_{P^*(s_p)}}{c^{s_p}_{P^*(s_p)}} = 
+\frac{\sum\limits_{(i,j) \in P \setminus P^*(s_p)} c^{s_p}_{ij} - \sum\limits_{(i,j) \in P^*(s_p) \setminus P} c^{s_p}_{ij}}{\sum\limits_{(i,j) \in P^*(s_p) \setminus P} c^{s_p}_{ij}}
+\\
+\leq \frac{\sum\limits_{(i,j) \in P \setminus P^*(s_p)} c^{s}_{ij} - \sum\limits_{(i,j) \in P^*(s_p) \setminus P} c^{s}_{ij}}{\sum\limits_{(i,j) \in P^*(s_p) \setminus P} c^{s}_{ij}} 
+= \frac{c^{s}_{P} - c^{s}_{P^*(s_p)}}{c^{s}_{P^*(s_p)}} \leq \frac{c^{s}_{P} - c^{s}_{P^*(s)}}{c^{s}_{P^*(s)}}
+\end{equation}
+\end{center}
+\end{ambiente}
+Portanto $s$ é um cenário que também maximiza o desvio robusto relativo para o caminho $P$.

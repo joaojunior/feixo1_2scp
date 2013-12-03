@@ -1,0 +1,46 @@
+﻿No problema de caminho mais curto clássico a restrição \eqref{eq:fluxo} garante que as possíveis soluções para esse problema sejam um caminho do 
+nó de origem $s$ ao nó de destino $t$. A função objetivo nesse caso, minimiza o custo desses 
+possíveis caminhos, encontrando assim a solução para o problema e garantindo que essa solução não tenha ciclos, pois estamos considerando grafos sem
+ciclos negativos. No RSP-IRR, a restrição de fluxo \eqref{eq:fluxo} continua garantindo que as possíveis soluções sejam um caminho do nó de origem
+$s$ ao nó de destino $t$, porém a função objetivo \eqref{eq:objetivo} não garante que a solução não tenha ciclos positivos. A figura \ref{fig:grafo_1} apresenta um grafo com os custos dos arcos definidos em um intervalo de valores. Nesse grafo, considerando apenas caminhos
+sem ciclos, os possíveis caminhos do nó de origem $s$ ao nó de destino $t$ são:$\{(s,1),(1,t)\}$ e $\{(s,2),(2,t)\}$, com o desvio robusto relativo máximo 
+respectivamente igual á $\frac{20165}{120}=167.04$ e $\frac{20120}{165}=120.94$. Considerando caminhos com ciclos positivos, o caminho 
+$\{(s,1),(1,s),(s,2),(2,t),(t,1),(1,t)\}$ com desvio robusto relativo máximo igual á $\frac{60388}{20120}=2.0014$ será a solução para o RSP-IRR. Portanto 
+caso nenhuma restrição garanta a não existência de ciclos positivos no caminho robusto $P$ do nó de origem $s$ ao nó de destino $t$, um caminho 
+com ciclo positivo poderá ser a solução para o RSP-IRR.
+\begin{figure}[!h]
+    \begin{center}
+          \begin{tikzpicture}[>=latex',line join=bevel,]
+            [scale=.8,auto=left]
+            \node (1) at (100bp,100bp) [draw,circle] {$1$};
+            \node (2) at (0bp,0bp) [draw,circle] {$2$};
+            \node (s) at (0bp,100bp) [draw,circle,fill=black!10] {$s$};
+            \node (t) at (100bp,0bp) [draw,circle,fill=black!10] {$t$};
+            \draw [->] (s) -- node[fill=white,inner sep=1pt,sloped] {$[87,10087]$} (1);
+            \draw [->] (1) edge [bend left] node[fill=white,inner sep=1pt,sloped] {$[16,10016]$} (s);
+            \draw [->] (s) -- node [fill=white,inner sep=1pt,sloped] {$[84,10084]$} (2);
+            \draw [->] (2) edge [bend left] node[fill=white,inner sep=1pt,sloped] {$[94,10094]$} (s);                        					
+            \draw [->] (1) -- node [fill=white,inner sep=1pt,sloped] {$[78,10078]$} (t);
+            \draw [->] (t) edge [bend left] node[fill=white,inner sep=1pt,sloped] {$[87,10087]$} (1);
+   			\draw [->] (2) -- node [fill=white,inner sep=1pt,sloped] {$[36,10036]$} (t);
+            \draw [->] (t) edge [bend left] node[fill=white,inner sep=1pt,sloped] {$[93,10093]$} (2);
+          \end{tikzpicture}
+    \end{center}
+    \caption{Exemplo de um grafo com os custos dos arcos definido por um intervalo de valores.}
+    \label{fig:grafo_1}
+\end{figure}
+Esta seção propõe uma maneira de modelar o RSP-IRR em grafos que possuem ciclos positivos.\\
+Segundo Miller-Tucker-Zemlin \cite{MTZ1991} é preciso inserir variáveis $t_i \forall i \in V$ juntamente com as restrições topológicas \eqref{eq:eliminacao1}-\eqref{eq:eliminacao3} 
+para a eliminação de ciclos de um caminho em um grafo que possui ciclos positivos. A restrição \eqref{eq:eliminacao1} garante que se o arco $(i,j) \in A$ 
+estiver no caminho considerado, isso acontece quando $y_{i,j} = 1$, o valor da variável $t_i$ será menor do que o valor de $t_j$. Isso garante a 
+não existência de um ciclo, pois seja $P = \{(s,1),(1,s),(s,2),(2,t)\}$ o caminho considerado. Ao considerar o arco $(s,1)$ a restrição \eqref{eq:eliminacao1}
+pode ser reescrita como $t_s - t_1 \leq -1$ e ao considerar o arco $(1,s)$ pode ser reescrita como $t_1 - t_s \leq -1$. É fácil verificar que essas duas
+inequações não podem ser satisfeitas simultaneamente, portanto o ciclo não pode ocorrer. \\
+A formulação não linear para o RSP-IRR, cuja solução não contempla caminhos com ciclos 
+positivos é formada pela função objetivo \eqref{eq:objetivo} e as restrições 
+\eqref{eq:sp}-\eqref{eq:caminhos_positivos}, \eqref{eq:eliminacao1}-\eqref{eq:eliminacao3}.
+\begin{align}
+    & t_i - t_j + |V|y_{i,j} \leq |V| - 1, \forall (i,j) \in A \label{eq:eliminacao1} \\
+    & t_s = 0 \label{eq:eliminacao2} \\
+    & 0 \leq t_i \leq |V| \label{eq:eliminacao3}
+\end{align}

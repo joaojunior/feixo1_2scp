@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings version="2">
+  <category name="run">
+    <setting name="run_engineexportextension" value="lp"/>
+  </category>
+  <category name="language">
+    <setting name="bigmapthreshold" value="999999999"/>
+  </category>
+</settings>

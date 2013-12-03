@@ -1,0 +1,52 @@
+﻿Segundo Averbakh \cite{Averbakh2005273}, o RSP-IRR é um problema NP-Difícil, portanto acredita-se que não pode ser resolvido de forma exata em tempo polinomial.
+Essa seção apresenta duas heurísticas que serão comparadas. A seção \ref{sec:MKasperski} apresenta uma heurística desenvolvida 
+por Kasperski e será chamada aqui de M-Kasperski. A seção \ref{sec:heuristicaProposta} apresenta uma 
+heurística desenvolvida nesse trabalho e será chamada de Melhoria Percentual. \\
+
+\subsection{Heurística M-Kasperski}\label{sec:MKasperski}
+A heurística M-Kasperski [\cite{kasperski06},\cite{kasperski07},\cite{kasperski09}] busca o caminho mais curto robusto
+entre $s \in A$ e $t \in A$ no cenário onde todas as arestas do grafo estão com o custo fixado na média aritmética do menor e maior
+valor do intervalo dessas arestas. A heurística recebe como parâmetro de entrada um grafo $G=(V,A)$,
+os limites inferiores $(l_{i,j})$, superiores $(u_{i,j})$ para o custo de cada arco $(i,j) \in A$ e o vértice de
+origem $s \in V$ e de destino $t \in V$. A heurística M-Kasperski consiste em fixar o cenário de busca da solução
+no cenário denominado $r^M$. Nesse cenário, cada arco $(i,j) \in A$ está com o custo fixado em $c^{r^M}_{i,j} = \frac{l_{ij}+u_{ij}}{2}$.
+Após fixar o cenário $r^M$, a heurística M-Kasperski busca o caminho de menor custo entre o nó de origem $s$ e o nó de destino $t$ utilizando
+o algoritmo de Dijkstra \cite{dijkstra59}. Portanto a ordem de complexidade dessa heurística no pior caso é $O(|A| + |V|log(V))$ \cite{dijkstra59}. \\
+A figura \ref{f_Kasperski} apresenta o algoritmo para a heurística M-Kasperski.
+A linha $2$ executa o algoritmo de
+Dijsktra \cite{dijkstra59} para encontrar o menor caminho do nó de origem $s$ até o nó de destino $t$ no cenário $r^M$.
+A linha $3$ retorna então o caminho robusto encontrado pela heurística M-Kasperski.
+\begin{figure}
+\centering
+\includegraphics[width=4in]{AlgoritmoHeuristicaKasperski.PNG}
+\caption{Algoritmo da Heurística M-Kasperski}
+\label{f_Kasperski}
+\end{figure}
+
+\subsection{Heurística Melhoria Percentual}\label{sec:heuristicaProposta}
+Essa heurística consiste na busca e melhoria do caminho mais curto entre o nó de origem $s \in A$ e o nó de destino $t \in A$ no cenário, $r^u$, 
+onde todas as arestas $(i,j) \in A$ estão com os custos fixados em $u_{ij}$. Essa heurística recebe como parâmetro de entrada um grafo $G=(V,A)$,
+os limites inferiores $(l_{i,j})$ e superiores $(u_{i,j})$ para o custo de cada arco $(i,j) \in A$, o vértice de
+origem $s \in V$ e de destino $t \in V$ e calcula o caminho de menor custo, denominado $P^{r^u}$, entre $s$ e $t$ no cenário $r^u$. 
+Após isso a heurística retira de $A$ uma porcentagem das arestas que estão no caminho $P^{r^u}$ e calcula o caminho de menor custo, encontrando 
+um novo caminho $P^{r^u}$, entre $s$ e $t$ no cenário $r^u$. 
+A heurística armazena o melhor desses dois caminhos encontrados. Isso é feito até que $90\%$ das arestas do melhor caminho $P^{r^u}$ tenha sido 
+retirados de $A$ ou que cinco iterações aconteçam sem que o melhor caminho $P^{r^u}$ tenha sido alterado. \\
+A figura \ref{f_HeuristicaProposta} apresenta o algoritmo dessa heurística. A linha 2 calcula o caminho de menor custo, $P^{r^u}$, entre 
+o nó de origem $s \in A$ e o nó de destino $t \in A$ no cenário $r^u$. A linha 3 armazena esse caminho encontrado em $melhor\_caminho$. A 
+linha 4 inicia a variável $iteracoes\_sem\_melhoria$ com o valor zero. O laço das linhas 5 até 18 é executado até 
+que $90\%$ das arestas da melhor solução encontrada tenha sido retirada de $A$ ou que ocorrá
+cinco iterações sem que a solução tenha sido melhorada. A linha 6 retira do grafo $G$ as primeiras $p\%$ arestas da melhor solução armazenada em 
+$melhor\_caminho$. A linha 7 busca o caminho de menor custo entre o nó de origem $s$ e o nó de destino $t$ no cenário $r^u$ . A linha 8 
+verifica se o custo do caminho encontrado é melhor que o custo da melhor solução armazenada, caso positivo, as linhas 9 e 10 são executadas, caso 
+contrário a linha 13 é executada. A linha 9 substitui a melhor solução pela solução corrente e a linha 10 reinicia o valor de $iteracoes\_sem\_melhoria$ 
+em zero. A linha 13 incrementa o valor de $iteracoes\_sem\_melhoria$.
+A linha 19 retorna a melhor solução encontrada pela heurística. \\
+Essa heurística executa o algoritmo de Dijkstra, no pior caso, dez vezes, fazendo a ordem de complexidade ser $O(|A| + |V|log(V))$.
+
+\begin{figure}
+\centering
+\includegraphics[width=4in]{AlgoritmoHeuristicaProposta.PNG}
+\caption{Algoritmo da Heurística Melhoria Percentual}
+\label{f_HeuristicaProposta}
+\end{figure}

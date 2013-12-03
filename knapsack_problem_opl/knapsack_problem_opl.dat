@@ -1,0 +1,4 @@
+number_items = 4;
+costs = [-7, -9, -2, -15];
+weights = [3, 4, 1, 7];  
+weight_max = 10;

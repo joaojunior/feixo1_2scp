@@ -1,0 +1,49 @@
+﻿Com exceção da função objetivo \eqref{eq:objetivo} mostrada na seção anterior, a modelagem matemática para o RSP-IRR é linear.
+Baseando-se em \cite{Bisschop2005} está seção propõe uma linearização da função objetivo \eqref{eq:objetivo}, constituindo uma modelagem
+matemática por programação linear inteira mista para o problema RSP-IRR. \\
+Inicialmente, a função objetivo \eqref{eq:objetivo} é reescrita como: \\
+\begin{align}
+    & \text{Z = min } \frac{\sum\limits_{(i,j) \in A} u_{ij}y_{ij}}{x_t} - \frac{x_t}{x_t} \nonumber
+\end{align}
+Como $\frac{x_t}{x_t} = 1$, podemos reescrever a função objetivo anterior como:
+\begin{align}
+    & \text{Z = min } \sum\limits_{(i,j) \in A} u_{ij}\frac{y_{ij}}{x_t} - 1 \nonumber
+\end{align}
+Em seguida, são introduzidas as variáveis $z_{i,j}$, com a seguinte restrição:
+\begin{align}
+    & z_{ij} = \frac{y_{ij}}{x_t}, \forall (i,j) \in A \nonumber
+\end{align}
+Então, a função objetivo pode agora ser novamente reescrita como:
+\begin{align}
+    & \text{Z = min } \sum\limits_{(i,j) \in A} u_{ij}z_{ij} - 1 \label{eq:objetivolinear}
+\end{align}
+Para garantir que 
+\begin{align}
+    & z_{ij} = \frac{y_{ij}}{x_t}, \forall (i,j) \in A \nonumber
+\end{align}
+é preciso inserir as restrições \eqref{eq:linearizacao1},\eqref{eq:linearizacao2},\eqref{eq:linearizacao3}, abaixo.
+\begin{align}
+    & z_{ij} \leq y_{ij}, \forall (i,j) \in A  \label{eq:linearizacao1}\\
+    & z_{ij} \geq \frac{1}{x_t} - (1 - y_{i,j}), \forall (i,j) \in A  \label{eq:linearizacao2}\\
+    & z_{ij} \in [0,1], \forall (i,j) \in A \label{eq:linearizacao3}
+\end{align}
+Agora é preciso linearizar a restrição \eqref{eq:linearizacao2}, o que pode ser feito adicionando as variáveis $w_l$, tais que
+$w_l = 1$, se e somente se $x_t = l$, onde $l \in [L,U]$ no qual $L$ é o custo do caminho mais curto entre o nó de origem $s$ e o nó de destino $t$ 
+no cenário em que todos os arcos $(i,j) \in A$ estão com os valores fixados em $l_{i,j}$ e $U$ é o custo do caminho mais curto entre o nó de 
+origem $s$ e o nó de destino $t$ no cenário em que todos os arcos $(i,j) \in A$ estão com os valores fixados em $u_{i,j}$. Para cada valor
+$l \in [L,U]$, é introduzida uma variável $w_l \in \{0,1\}$. Essa variável tem o valor 1, quando $x_t = l$ e 0, caso contrário.
+Portanto a restrição \eqref{eq:linearizacao2} pode ser reescrita como
+\begin{align}
+    & z_{ij} \geq \frac{1}{l}w_l - (1 - y_{ij}), \forall (i,j) \in A \label{eq:linearizacao4}
+\end{align}
+E as restrições \eqref{eq:linearizacao5},\eqref{eq:linearizacao6} e \eqref{eq:linearizacao7} são inseridas na formulação. 
+\begin{align}
+    & \sum\limits_{l \in [L,U]} w_l \geq 1  \label{eq:linearizacao5} \\
+    & \sum\limits_{l \in [L,U]} lw_l = x_t  \label{eq:linearizacao6} \\
+    & w_l \in \{0,1\} \forall l \in [L,U] \label{eq:linearizacao7}
+\end{align}
+Assim a formulação linear inteira mista para o RSP-IRR é constituída pela função objetivo \eqref{eq:objetivolinear} e as restrições 
+\eqref{eq:sp}-\eqref{eq:caminhos_positivos}, \eqref{eq:linearizacao1},\eqref{eq:linearizacao3},\eqref{eq:linearizacao4}-\eqref{eq:linearizacao7}. Para
+linearizar a modelagem matemática apresentada na seção \ref{sec:grafosCiclos} basta substituir a função objetivo pela função \eqref{eq:objetivolinear} 
+e adicionar as restrições \eqref{eq:linearizacao1},\eqref{eq:linearizacao3},
+\eqref{eq:linearizacao4}-\eqref{eq:linearizacao7} ao conjunto de restrições apresentadas naquela seção.

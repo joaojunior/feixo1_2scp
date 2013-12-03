@@ -1,0 +1,29 @@
+﻿\section{Problema do Caminho Mais Curto Robusto Intervalar com Arrependimento Relativo}\label{sec:RSP-IRR}
+Seja $G = (V,A)$ um grafo direcionado, no qual $V$ é um conjunto de vértices e $A$ é um conjunto de arcos, 
+onde cada arco $(i,j) \in A$ tem o custo $c_{i,j}$ no intervalo de valores $[l_{ij},u_{ij}]$, 
+com $l_{ij} \leq u_{ij}  \forall (i,j) \in A$. Defini-se um cenário $r \subset S$, onde $S$ é o conjunto infinito de todos os cenários, como 
+uma fixação de valores $c_{ij}^r \in [l_{ij}, u_{ij}]$ para todos os arcos $(i,j)\in A$. Dado um nó de origem $s \in V$, um nó de destino
+$t \in V$ e um caminho $P \subseteq A$ entre $s$ e $t$, define-se o desvio robusto relativo de $P$ no cenário $r \subset S$, denominado $d_P$, como 
+a razão entre $(i)$ a diferença do custo do caminho $P$ no cenário $r$, representado por $c^r_P$ e o custo do menor caminho entre $s$ e $t$ no cenário $r$, representado
+por $c^r_{P^*(r)}$, e $(ii)$ o custo do menor caminho entre $s$ e $t$ no cenário $r$. Como existem infinitos cenários, o caminho $P \subseteq A$ possui 
+diversos desvio robusto relativo, um para cada cenário $r \subset S$. A partir da proposição 2.3 presente em \cite{karasan01}, podemos derivar a 
+proposição 1, que mostra como é possível encontrar o desvio robusto relativo máximo de um caminho $P \subseteq A$.\\ 
+\input{proposicao.tex}
+\\
+O problema do Caminho Mais Curto Robusto Intervalar com Arrependimento Relativo(RSP-IRR) consiste em encontrar o caminho robusto $P \subseteq A$ do nó de origem
+$s \in V$ ao nó de destino $t \in V$ que possui o menor desvio robusto relativo máximo. A seção \ref{sec:modelagem} apresenta a 
+modelagem matemática para o RSP-IRR em grafos que não possuem ciclos, a seção \ref{sec:grafosCiclos} propõe uma modelagem 
+matemática do RSP-IRR para grafos que possuem ciclos positivos e a seção \ref{sec:linearizacao} mostra uma linearização da modelagem matemática
+apresentada na seção \ref{sec:modelagem}. 
+
+\subsection{Modelagem Matemática para o RSP-IRR em grafos acíclicos}\label{sec:modelagem}
+\input{modelagem.tex}
+
+\subsection{Modelagem Matemática para o RSP-IRR em Grafos que possuem Ciclos Positivos}\label{sec:grafosCiclos}
+\input{modelagemgrafosCiclos.tex}
+
+\subsection{Linearização para o RSP-IRR}\label{sec:linearizacao}
+\input{linearizacao.tex}
+
+\section{Heurísticas para o RSP-IRR}\label{sec:heuristicas}
+\input{heuristicas.tex}

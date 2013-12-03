@@ -1,0 +1,213 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+
+
+\documentclass{beamer}
+
+%
+% DO NOT USE THIS FILE AS A TEMPLATE FOR YOUR OWN TALKS¡!!
+%
+% Use a file in the directory solutions instead.
+% They are much better suited.
+%
+
+
+% Setup appearance:
+\usetheme{Madrid}
+%\usetheme{Darmstadt}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+
+
+% Standard packages
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[lined,boxed,commentsnumbered, linesnumbered]{Algorithm2e}
+
+
+% Setup TikZ
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\tikzstyle{block}=[draw opacity=0.7,line width=1.4cm]
+
+
+% Author, Title, etc.
+
+\title[Set Covering(SCP)] 
+{
+  Otimização no rank-1 de Chvátal-Gomory do problema Set Covering
+}
+
+\author[João Júnior]
+{
+  João Júnior\inst{1}
+}
+
+\institute[UFMG]
+{
+  \inst{1}%
+  Universidade Federal de Minas Gerais
+}
+
+\date[Otimização Comb. e Inteira]
+{Otimização Combinatória e Inteira - 2013}
+
+
+
+% The main document
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Sumário}
+  \tableofcontents
+\end{frame}
+
+
+\section{$SCP$}
+\subsection{Definições}
+\begin{frame}{$SCP$ - Definição do Problema}  
+Dados $M=\{1,...,m\}$ e $N=\{1,...,n\}$ dois conjuntos. Seja $M_1$, $M_2$, ..., $M_n$ uma coleção de subconjuntos 
+de $M$ com um custo $c_j$ associado a cada um desses subconjuntos. Uma cobertura de $M$ é um subconjunto 
+$F \subset N$ tal que $\cup_{j \in F} M_j = M$.
+\end{frame}
+
+\begin{frame}{$SCP$ - Formulação Matemática}
+\begin{align}
+    & \text{min } \sum_{j \in N} c_jx_j \label{eq:objetivo} \\
+    & \text{Sujeito à:} \nonumber \\
+    & Ax \ge 1 \\
+    & x \in \{0,1\}^n \label{eq:binarias}
+\end{align}
+Onde $A$ é uma matriz de incidência  de tamanho $mxn$ para a coleção de subconjuntos 
+$M_j, \forall j \in N$, com as entradas dadas por: \
+\begin{align}
+    & a_{ij} = \left \{\begin{array}{ll} 1; & \textrm{se } i \in M_j \textrm{,} \nonumber \\
+    0; & \textrm{caso contrário} \nonumber \label{eq:fluxo} \nonumber
+    \end{array}\right.
+\end{align}
+\end{frame}
+
+\begin{frame}{$SCP$ - Revisão Bibliográfica}
+\begin{itemize}
+    \item On the Set Covering Polytope: I. All the Facets with coefficients in \{0,1,2\}(Balas,ShuMing-1989)
+    \item On the Set Covering Polytope: All the Facets with coefficients in \{0,1,2,3\}(Saxena-2004)
+    \item Set Covering algorithms using cutting planes, heuristics, and subgradient optimization: a computational(Balas,Andrew-1980)
+    \item An  algorithm  for set covering  problem(Beasley-1987)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Algoritmo para encontrar cortes de Chvátal-Gomory de rank-1 para o $SCP$}  
+   	\begin{figure}
+    \centering
+    \includegraphics[width=4in]{AlgoritmoRank1.PNG}
+    \label{AlgoritmoRank1}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Formulação Matemática para o Modelo de Separação}  
+\begin{align}
+    & \text{min } \sum_{j \in N} \alpha_jx_j - \alpha_0 \\
+    & \text{Sujeito à:} \nonumber \\
+    & 0 \le \alpha_j - u^TA_j  \le 1 -\delta \textrm{,} \forall j \in N \\ 
+    & 0 \le \alpha_0 - u^Tb \le 1 -\delta \\
+    & 0 \le u_i \le 1 -\delta \textrm{,} \forall i=1,...,m \\
+    & \alpha_0 \le \sum_{j \in N} \alpha_j \textrm{,} \\
+    & \alpha_0, \alpha_j \textrm{ inteiro, } \forall j \in N 
+\end{align}
+\end{frame}
+
+\subsection{Exemplo}
+\begin{frame}{Exemplo}  
+$c = (60, 7, 11, 5, 8, 5)$
+$$
+\begin{pmatrix} 
+    1 & 0 & 1 & 0 & 0 & 1 \\ 
+    0 & 1 & 0 & 1 & 1 & 0 \\ 
+    1 & 1 & 1 & 0 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 & 1 & 0 \\ 
+\end{pmatrix}
+$$
+\begin{itemize}
+    \item 38 Pontos Viáveis
+    \item Na igualdade: 13 satisfazem restrição 1, 14 satisfazem restição 2, 12 satisfazem restição 3 e 22 satisfazem restição 4
+    \item Relaxação linear: $x=(0.0, 0.5, 0.5, 0.0, 0.5, 0.5)$, Custo da Solução: 15.5
+    \item Corte Adicionado: $2x_1 + 1x_2 + 2x_3 + 1x_4 + 1x_5 + 1x_6 \ge 3$
+    \item Multiplicador: $u=(0.99,0.495,0.505,0.505)$, Restição Gerada: $1.495x_1 + 1x_2 + 2x_3 + 0.495x_4 + 1x_5 + 0.99x_6 \ge 2.495$
+    \item 5 pontos satisfazem essa nova restrição na igualdade 
+\end{itemize}
+\end{frame}
+
+\subsection{Experimentos Computacionais}
+\begin{frame}{Instâncias de testes}  
+    \begin{table}[htbp]
+    \begin{center}
+      \begin{tabular}{|c|r|r|r|r|}
+        \hline
+          Conjunto & Linhas   & Colunas & Densidade   & Problemas\\ \hline
+          4        & 200      & 1000    & 2           & 10 \\ \hline
+          6        & 200      & 1000    & 5           & 5 \\ \hline
+          A        & 300      & 3000    & 2           & 5 \\ \hline
+          B        & 300      & 3000    & 5           & 5 \\ \hline
+      \end{tabular}
+    \label{table:instancias}
+    \end{center}
+    \end{table}
+\end{frame}
+
+
+\begin{frame}{Parâmetros de testes}
+Parâmetros Gerais:
+\begin{itemize}
+\item Tempo Máximo de Execução: 7200(Segundos)
+\end{itemize}
+Para o Modelo de Separação:
+\begin{itemize}
+  \item Tempo Máximo de Execução: 120(Segundos)
+  \item Máximo de 5 soluções inteiras
+  \item Máximo 50000 nós na árvore de Branch-and-Bound
+  \item ênfase na busca de soluções foi setado 4
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Resultados para o conjunto de testes 4 e 6}
+    \begin{figure}
+        \centering
+        \includegraphics[width=4in]{tabela1.PNG}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Resultados para o conjunto de testes A e B}
+    \begin{figure}
+        \centering
+        \includegraphics[width=4in]{tabela2.PNG}
+    \end{figure}
+\end{frame}
+
+\appendix
+
+\section*{Dúvidas}
+
+\begin{frame}{Dúvidas?}
+	Dúvidas?
+\end{frame}
+\end{document}
+
+

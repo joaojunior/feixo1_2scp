@@ -1,0 +1,45 @@
+\section{Exemplo}\label{sec:exemplo} 
+Essa seção apresenta uma pequena instância para o problema $SCP$. Essa instância é então 
+passada como entrada para o algoritmo da seção \ref{sec:algoritmo} e também é estudada com o software PORTA.
+Para essa instância, o conjunto $M=\{1,2,3,4\}$ e o conjunto $N=\{1,2,3,4,5,6\}$. A matriz de incidência
+$A$ para a coleção dos subconjuntos $M_j, \forall j \in N$ é dada abaixo.
+$$
+\begin{pmatrix} 
+    1 & 0 & 1 & 0 & 0 & 1 \\ 
+    0 & 1 & 0 & 1 & 1 & 0 \\ 
+    1 & 1 & 1 & 0 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 & 1 & 0 \\ 
+\end{pmatrix}
+$$
+O custo $c_j$ de cada um dos subconjuntos $M_j$ é dado por $c = (60, 7, 11, 5, 8, 5)$.\\
+Ao submeter essa instância ao software PORTA nós encontramos 38 pontos viáveis. Sendo que desses 38 pontos viáveis
+13 satisfazem na igualdade a restrição formada pela linha 1, 14 satisfazem na igualdade
+a restrição formada pela linha 2, 12 satisfazem na igualdade a restrição composta pela linha 3 e 22 satisfazem na igualdade a
+restrião formada pela linha 4 da matriz de incidência $A$. Ao executar o algoritmo
+da seção \ref{sec:algoritmo}, a solução encontrada pela relaxação linear é $x=(0.0, 0.5, 0.5, 0.0, 0.5, 0.5)$, 
+com um valor objetivo igual a 15.5, então o algoritmo encontra
+a restrição $2x_1 + 1x_2 + 2x_3 + 1x_4 + 1x_5 + 1x_6 \ge 3$, que pode ser obtida com o arredondamento da soma de
+um múltiplo das restrições da matriz de incidência $A$, onde as linhas são respectivamente multiplicadas
+por $u=(0.99,0.495,0.505,0.505)$. A soma das linhas utilizando esses multiplicadores nos trazem a seguinte inequação:
+$1.495x_1 + 1x_2 + 2x_3 + 0.495x_4 + 1x_5 + 0.99x_6 \ge 2.495$, fazendo o arredondamento para o inteiro maior ou igual
+aos coeficientes, teremos a seguinte inequação $2x_1 + 1x_2 + 2x_3 + 1x_4 + 1x_5 + 1x_6 \ge 3$, que é exatamente
+o corte de Chvátal-Gomory de rank-1 encontrado pelo algoritmo da seção \ref{sec:algoritmo}. Utilizando o software PORTA
+é confirmado que essa restrição é válida para essa instância do $SCP$, pois os mesmos 38 pontos continuam sendo gerados
+como pontos viáveis. Claramente essa restrição corta o ponto $x=(0.0, 0.5, 0.5, 0.0, 0.5, 0.5)$, pois utilizando 
+esse ponto nessa nova restrição, teríamos $2.5 \ge 3$ que é falso. A segunda iteração do algoritmo vai então encontrar o ponto $x=(0.0, 0.0, 1.0, 1.0, 0.0, 0.0)$, com valor objetivo igual a 16, que 
+é exatamente a solução encontrada executando o modelo de programação inteira da seção \ref{sec:modelagem} para essa instância.
+Rodando no software PORTA essa instância, agora com essa nova restrição, novamentes temos 38 pontos viáveis, 
+porém apenas 5 desses pontos satisfazem essa nova inequação na igualdade. Rodando o software PORTA passando esses 38
+pontos viáveis e procurando uma caracterização do politopo do $SCP$, encontramos a seguinte matriz de incidência:
+$$
+\begin{pmatrix} 
+    1 & 0 & 1 & 0 & 0 & 1 \\ 
+    0 & 1 & 0 & 1 & 1 & 0 \\ 
+    1 & 1 & 1 & 0 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 & 1 & 0 \\ 
+    1 & 1 & 1 & 1 & 1 & 1
+\end{pmatrix}
+$$
+com o vetor $b=(1,1,1,1,2)$. Observe que a restrição adicional encontrada pelo software PORTA é muito parecida
+com a restrição encontrada pelo algoritmo da seção \ref{sec:algoritmo}, porém a restrição encontrada pelo algoritmo
+é dominada pela restrição encontrada pelo software PORTA.

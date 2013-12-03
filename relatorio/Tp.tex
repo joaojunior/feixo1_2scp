@@ -1,0 +1,116 @@
+\documentclass{proc}
+
+\usepackage{edbkps}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{subfig}
+%%\usepackage[lined,boxed,commentsnumbered, linesnumbered]{algorithm2e}
+
+
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{0}
+\let\footnote\savefootnote
+\let\footnotetext\savefootnotetext
+\let\footnoterule\savefootnoterule
+\normallatexbib
+\makeatletter
+\renewcommand{\@ptsize}{0}
+\makeatother
+
+%%%%%
+%% If you use a font encoding package, please enter it here, i.e.,
+\usepackage{t1enc}
+
+
+%%%%%
+% Style for inserting .eps files and rotating illustrations or tables
+
+% possible options for graphicx:
+% [dvips], [xdvi], [dvipdf], [dvipsone], [dviwindo], [emtex], [dviwin],
+% [pctexps],  [pctexwin],  [pctexhp],  [pctex32], [truetex], [tcidvi],
+% [oztex], [textures]
+
+\usepackage[dvips]{graphicx}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+\usepackage{amsmath}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\articletitle[The Set Covering problem]
+{Otimização no rank-1 de Chvátal-Gomory para o problema Set Covering}
+
+\author{João C. Abreu\altaffilmark{1}}
+
+\altaffiltext{1}{Universidade Federal de Minas Gerais, DCC, \\
+Avenida Antônio Carlos 6627, Belo Horizonte, Brazil,\\
+\email{joao.junior@dcc.ufmg.br}}
+
+\anxx{João C. Abreu Jr.,Universidade Federal de Minas Gerais\,
+Avenida Antônio Carlos 6627\, Belo Horizonte\, Brasil\,
+\emailfont{joao.junior@dcc.ufmg.br}}
+
+\begin{abstract}
+Esse trabalho apresenta o problema Set Covering e um algoritmo para gerar todos os cortes de rank-1 de Chvátal-Gomory para esse problema.
+
+\end{abstract}
+
+\begin{keywords}
+\inx{Set Covering}, \inx{Chvátal-Gomory}, \inx{Desigualdades válidas}
+\end{keywords}
+
+\doublespacing
+
+\section{Introdução}
+\label{sec:intro}
+
+Dados $M=\{1,...,m\}$ e $N=\{1,...,n\}$ dois conjuntos. Seja $M_1$, $M_2$, ..., $M_n$ uma coleção de subconjuntos 
+de $M$ com um custo $c_j$ associado a cada um desses subconjuntos. Uma cobertura de $M$ é um subconjunto 
+$F \subset N$ tal que $\cup_{j \in F} M_j = M$. O problema que consiste em encontrar esse subconjunto $F \subset N$ de custo mínimo
+é denominado o problema Set Covering($SCP$). Segundo Balas\cite{balas89} esse problema é $np$-$dificil$ e não se conhece uma boa caracterização do politopo desse
+problema. \\
+Em \cite{balas89}, Balas caracteriza a classe de inequações válidas para o $SCP$ com coeficientes iguais a 0,1 ou 2 e apresenta condições 
+necessárias e suficientes para essas restrições serem não dominadas por outras. Esse paper também mostra que todas as inequações desse tipo são
+às únicas a formarem o feixo 1 de Chvátal-Gomory. \\
+Em \cite{saxena04} Saxena extende o trabalho de Balas\cite{balas89} e apresenta uma caracterização da classe de inequações válidas para o $SCP$ com 
+coeficientes iguais a 0, 1, 2 ou 3 e propõe um problema $np$-$dificil$ para gerar todas essas inequações a partir de soluções fracionárias
+do $SCP$. \\
+Em \cite{Beasley87}, Beasley propõe um algoritmo para resolver o $SCP$ baseado nos resultados teóricos propostos em \cite{balas89}. \\
+O Objetivo desse trabalho é otimizar o problema $SCP$ através do rank-1 de Chvátal-Gomory. A seção \ref{sec:modelagem} apresenta uma modelagem
+matemática para esse problema, a seção \ref{sec:algoritmo} apresenta um algoritmo para gerar as restrições Chvátal-Gomory de rank1 e resolver
+o $SCP$ com essas restrições, a seção \ref{sec:exemplo} apresenta um pequeno exemplo da utilização do algoritmo proposto na seção 
+\ref{sec:algoritmo},
+a seção \ref{sec:experimentos} apresenta os experimentos computacionais obtidos aplicando o algoritmo da seção \ref{sec:algoritmo} nas instâncias presentes na literatura e
+a seção \ref{sec:consideracoes} apresenta as conclusões. 
+
+\input{modelagem.tex}
+
+\input{algoritmo.tex}
+
+\input{exemplo.tex}
+
+\input{experimentos.tex}
+
+\input{consideracoes.tex}
+Todo código fonte produzido por esse trabalho pode ser obtido no endereço eletrônico: $https://github.com/joaojunior/feixo1\_2scp$
+
+\bibliographystyle{plain}
+\chapbblname{tp}  % The name of the .bbl file, what is normally the name of your .tex file.
+\bibliography{tp} %\chapbibliography{gow}
+
+\end{document}
+
+
+
+
+
+% LocalWords:  comeca ij kj ji lll hardcoded eq ranqueamento recuperável RRSP
+% LocalWords:  Recuperável Rent Minmax Regret Single Pair MSP SPP Cplex

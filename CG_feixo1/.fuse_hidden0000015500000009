@@ -1,0 +1,5 @@
+python main.py instancias_teste/scpnrg1.txt >> result_integer.txt
+python main.py instancias_teste/scpnrg2.txt >> result_integer.txt
+python main.py instancias_teste/scpnrg3.txt >> result_integer.txt
+python main.py instancias_teste/scpnrg4.txt >> result_integer.txt
+python main.py instancias_teste/scpnrg5.txt >> result_integer.txt

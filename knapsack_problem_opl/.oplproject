@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+	<version>1.0</version>
+	<configs>
+		<config default="true" name="Configuration1" category="opl">
+			<ref type="model" name="knapsack_problem_opl.mod">
+			</ref>
+			<ref type="data" name="knapsack_problem_opl.dat">
+			</ref>
+			<ref type="setting" name="set.ops">
+			</ref>
+		</config>
+	</configs>
+	
+</project>

@@ -1,0 +1,27 @@
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+% Todos os paragrafos sem identacao
+\setlength\parindent{0pt}
+\pagestyle{empty}
+\usepackage[utf8]{inputenc}
+\usepackage[lined,boxed,commentsnumbered, linesnumbered, portuguese]{algorithm2e}
+
+\begin{document}
+\begin{algorithm}
+\Entrada{Instância para o $SCP$}
+\Saida{Cobertura de menor custo encontrada}
+\Inicio{ \nonumber
+        x $\leftarrow$ Resolução da relaxação linear da instância $SCP$\\
+        \While{x não for inteiro ou o tempo máximo ocorra}{
+            \If{Existe algum corte de Chvátal-Gomory rank-1 que corta x?}{
+                Adicione o corte ao modelo relaxado \\
+                x $\leftarrow$ Resolução da relaxação linear da instância $SCP$\\
+            }
+            \Else{
+                break \\
+            }
+        }
+        \Retorna Melhor Solução Encontrada \\
+}            
+\end{algorithm}
+\end{document} 

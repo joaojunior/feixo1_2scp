@@ -1,0 +1,18 @@
+\section{Modelagem Matematica}\label{sec:modelagem} 
+Essa seção apresenta a formulação para o $SCP$ proposta em \cite{Bertsimas05}. Para formular o SCP como um problema
+de otimização inteira, é introduzida uma matriz de incidência $A$ de tamanho $mxn$ para a coleção de subconjuntos 
+$M_j, \forall j \in N$, com as entradas dadas por: \
+\begin{align}
+    & a_{ij} = \left \{\begin{array}{ll} 1; & \textrm{se } i \in M_j \textrm{,} \nonumber \\
+    0; & \textrm{caso contrário} \nonumber \label{eq:fluxo}
+    \end{array}\right. \\
+\end{align}
+Nessa formulação, a função objetivo \eqref{eq:objetivo} minimiza o custo da cobertura procurada. 
+Os valores constantes $c_j, \forall j \in N$ são os custos de cada subconjunto $M_j$. 
+A variável de decisão $x_j$ é igual a $1$ quando $j \in F$ e $0$, caso contrário, onde $F \subset N$ é a cobertura procurada. \\
+\begin{align}
+    & \text{min } \sum_{j \in N} c_jx_j \label{eq:objetivo} \\
+    & \text{Sujeito à:} \nonumber \\
+    & Ax \ge 1 \\
+    & x \in \{0,1\}^n \label{eq:binarias}
+\end{align}
